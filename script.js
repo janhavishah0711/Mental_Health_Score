@@ -1,4 +1,4 @@
-const API_BASE = "http://127.0.0.1:2200";
+const API_BASE = "https://mental-health-score-rvad.onrender.com";
 
 const form = document.getElementById("predictForm");
 const panel = document.getElementById("panel");

@@ -67,7 +67,7 @@ class PredictionResponse(BaseModel):
 
 @app.get('/')
 def greet():
-    return{' Welcome to SHeryians AI School Guys'}
+    return{' Welcome to THE MENTAL HEALTH SCORE PREDICTOR'}
 top_countries=['Other', 'India', 'USA', 'Canada', 'Australia', 'UK', 'Germany', 'Turkey', 'Mexico', 'France']
 
 @app.post('/predict', response_model=PredictionResponse)
