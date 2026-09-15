@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mindwell — Student Mental Health Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- LEFT: narrative panel -->
+  <aside class="intro">
+    <div class="intro-inner">
+      <div class="breath" aria-hidden="true"><span></span></div>
+      <p class="eyebrow">A quiet check-in</p>
+      <h1>Mindwell</h1>
+      <p class="intro-copy">
+        A short, honest look at how your daily habits — screen time, sleep,
+        study, movement — may be shaping your mental wellbeing. Answer at
+        your own pace. There are no wrong numbers here.
+      </p>
+      <p class="intro-note">
+        This estimate comes from a machine learning model trained on student
+        survey data. It's a reflection, not a diagnosis.
+      </p>
+    </div>
+  </aside>
+
+  <!-- RIGHT: form / result -->
+  <main class="content">
+    <div class="panel" id="panel">
+
+      <!-- FORM VIEW -->
+      <form id="predictForm" class="form" novalidate>
+
+        <section class="fgroup">
+          <h2>About you</h2>
+
+          <div class="field">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" min="10" max="100" value="21" required>
+            <p class="hint">Between 10 and 100.</p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="academic_level">Academic level</label>
+              <select id="academic_level" name="academic_level" required>
+                <option value="High School">High School</option>
+                <option value="Undergraduate" selected>Undergraduate</option>
+                <option value="Graduate">Graduate</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" placeholder="e.g. India" required>
+            <p class="hint">Used to group your region for the model behind the scenes.</p>
+          </div>
+        </section>
+
+        <section class="fgroup">
+          <h2>Digital habits</h2>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="most_used_platform">Most used platform</label>
+              <select id="most_used_platform" name="most_used_platform" required>
+                <option>Instagram</option>
+                <option>TikTok</option>
+                <option>YouTube</option>
+                <option>Facebook</option>
+                <option>WhatsApp</option>
+                <option>Snapchat</option>
+                <option>Twitter</option>
+                <option>LinkedIn</option>
+                <option>WeChat</option>
+                <option>LINE</option>
+                <option>KakaoTalk</option>
+                <option>VKontakte</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="purpose_of_use">Main purpose of use</label>
+              <select id="purpose_of_use" name="purpose_of_use" required>
+                <option>Entertainment</option>
+                <option>Networking</option>
+                <option>Education</option>
+                <option>News</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="avg_daily_usage_hours">Average daily usage <span class="val" id="avg_daily_usage_hours_val">6.0</span> hrs</label>
+            <input type="range" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="6" max="24" step="0.5" value="6">
+          </div>
+
+          <div class="field">
+            <label for="daily_unlocks">Phone unlocks per day</label>
+            <input type="number" id="daily_unlocks" name="daily_unlocks" min="0" value="40" required>
+          </div>
+        </section>
+
+        <section class="fgroup">
+          <h2>Wellbeing</h2>
+
+          <div class="field">
+            <label for="study_hours">Study hours per day <span class="val" id="study_hours_val">4.0</span> hrs</label>
+            <input type="range" id="study_hours" name="study_hours" min="0" max="24" step="0.5" value="4">
+          </div>
+
+          <div class="field">
+            <label for="physical_activity_hours">Physical activity per day <span class="val" id="physical_activity_hours_val">1.0</span> hrs</label>
+            <input type="range" id="physical_activity_hours" name="physical_activity_hours" min="0" max="24" step="0.5" value="1">
+          </div>
+
+          <div class="field">
+            <label for="sleep_hours_per_night">Sleep per night <span class="val" id="sleep_hours_per_night_val">7.0</span> hrs</label>
+            <input type="range" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0" max="24" step="0.5" value="7">
+          </div>
+
+          <div class="field">
+            <label for="stress_level">Perceived stress level </label>
+            <select id="stress_level" name="stress_level" required>
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+              <option value="Very High">Very High</option>
+            </select>
+
+            
+            <p class="hint">Choose the level that best describes your current perceived stress.</p>
+          </div>
+        </section>
+
+        <div id="formError" class="form-error" role="alert" hidden></div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span class="btn-label">Get my estimate</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <!-- RESULT VIEW -->
+      <div class="result" id="resultView" hidden>
+        <p class="result-eyebrow">Your estimate</p>
+        <div class="gauge">
+          <svg viewBox="0 0 200 110" class="gauge-svg">
+            <path class="gauge-track" d="M20,100 A80,80 0 0 1 180,100" />
+            <path class="gauge-fill" id="gaugeFill" d="M20,100 A80,80 0 0 1 180,100" />
+          </svg>
+          <div class="gauge-number"><span id="scoreValue">0</span></div>
+        </div>
+        <p class="result-label" id="resultLabel">—</p>
+        <p class="result-copy" id="resultCopy"></p>
+        <button class="secondary-btn" id="tryAgainBtn">Check again</button>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
